@@ -5,7 +5,11 @@ class GameBoard{
         this.gameBoard = Array(boardMaxY).fill(null).map(() => Array(boardMaxX).fill(null));
     }
 
-    placeShip(x, y, length, position, classOfShip){
+    placeShip(x, y, ship){
+
+        let length = ship.length;
+        let position = ship.position;
+        let classOfShip = ship.name;
 
         for(let i = 0; i < length; i++){ //placing ship
             position == "horizontal" ? this.gameBoard[x + i][y] = classOfShip : this.gameBoard[x][y + i] = classOfShip;
@@ -83,6 +87,25 @@ class GameBoard{
 
     receiveAttack(x, y){
        return typeof this.gameBoard[x][y] == "string" ? this.gameBoard[x][y] : null;
+    }
+
+    canPlaceShip(x, y, ship){
+        let length = ship.length;
+        let position = ship.position;
+        if(position == "horizontal"){
+            if( x + length > 10) return false; //if ships goes outside the board
+            for(let i = 0; i < length; i++){
+                if(this.gameBoard[x + i][y] != null) return false; //if any position is ocupied or inside a deathspace
+            }
+
+        }
+        if(position == "vertical"){
+            if( y + length > 10) return false;
+            for(let i = 0; i < length; i++){
+                if(this.gameBoard[x][y + i] != null) return false;
+            }
+        }
+        return true; //can place ship
     }
 }
 
