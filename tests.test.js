@@ -46,3 +46,47 @@ describe("Place ships in gameboard", () => {
     })
 
 })
+
+    describe("Place multiple ships in and count occupied spaces", () => {
+        //total of spaces occupied should be 18 for all ships
+        const carrier = new Ship(5, "carrier", "horizontal");
+        const battleship = new Ship(5, "battleship", "vertical");
+        const cruiser = new Ship(3, "cruiser", "horizontal");
+        const submarine = new Ship(3, "submarine", "horizontal");
+        const destroyer =new Ship(2, "destroyer", "vertical");
+
+        
+        const countOccupiedSpaces = (board) => {
+            let count = 0;
+            for(let j = 0; j< 10; j++){
+                for(let i = 0; i < 10; i++){
+                    if(typeof(board.gameBoard[i][j]) == "string") count += 1;
+                }
+            }
+            return count;
+        };
+
+        test("1 carrier and 1 submarine uses 8 spaces", () => {
+            const board = new GameBoard();
+
+            board.placeShip(0, 0, carrier);
+            board.placeShip(0,2, submarine);
+
+            expect(countOccupiedSpaces(board)).toBe(8);
+        })
+
+        test("place all ships in random order and uses 18 spaces", () => {
+            const board = new GameBoard();
+            board.randomPlace(carrier);
+            board.randomPlace(battleship);
+            board.randomPlace(cruiser);
+            board.randomPlace(submarine);
+            board.randomPlace(destroyer);
+
+            expect(countOccupiedSpaces(board)).toBe(18);
+
+        })
+
+       
+    })
+

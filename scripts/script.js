@@ -4,31 +4,15 @@ import Ship from "./Ship.js";
 
 //DOM.generateField();
 
+const board = new GameBoard();
 
+const carrier = new Ship(5, "carrier", "horizontal");
+const battleship = new Ship(5, "battleship", "vertical");
+const cruiser = new Ship(3, "cruiser", "horizontal");
+const submarine = new Ship(3, "submarine", "horizontal");
+const destroyer =new Ship(2, "destroyer", "vertical");
 
+const ships = [carrier, battleship, cruiser, submarine, destroyer];
+ships.forEach(el => board.randomPlace(el));
 
-//principal tree
-{
-    const board = new GameBoard();
-    //create ship
-    {
-        
-        let [x, y, length] = [1, 2, 5];
-        const destroyer = new Ship(length, "destroyer", "horizontal")
-        //place ship
-        {
-            if(board.canPlaceShip(x, y, destroyer)) board.placeShip(x, y, destroyer);
-            console.table(board.gameBoard)
-        }       
-         x = 5;
-         y = 4;
-         length = 5
-         const destroye = new Ship(length, "destroye", "vertical")
-         destroye.position = "horizontal"
-        //place ship
-        {
-            if(board.canPlaceShip(x, y, destroye)) board.placeShip(x, y, destroye);
-            console.table(board.gameBoard)
-        }
-    }
-}
+console.table(board.gameBoard)

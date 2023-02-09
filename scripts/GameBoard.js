@@ -25,35 +25,35 @@ class GameBoard{
             for(let j = 0; j < 10; j++){
                 if(typeof this.gameBoard[j][i] == "string"){
                     try{
-                        if(typeof this.gameBoard[j][i + 1] != "string") this.gameBoard[j][i + 1] = 0;
+                        if(typeof this.gameBoard[j][i + 1] != "string" && i + 1 < 10) this.gameBoard[j][i + 1] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j][i - 1] != "string" ) this.gameBoard[j][i - 1] = 0;
+                        if(typeof this.gameBoard[j][i - 1] != "string" && i - 1 > -1 ) this.gameBoard[j][i - 1] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j + 1][i] != "string") this.gameBoard[j + 1][i] = 0;
+                        if(typeof this.gameBoard[j + 1][i] != "string" && j + 1 < 10) this.gameBoard[j + 1][i] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j - 1][i] != "string") this.gameBoard[j - 1][i] = 0;
+                        if(typeof this.gameBoard[j - 1][i] != "string" && j - 1 > -1 ) this.gameBoard[j - 1][i] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j + 1][i + 1] != "string") this.gameBoard[j + 1][i + 1] = 0;
+                        if(typeof this.gameBoard[j + 1][i + 1] != "string" && j + 1 < 10 && i + 1 < 10) this.gameBoard[j + 1][i + 1] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j + 1][i - 1] != "string" ) this.gameBoard[j + 1][i - 1] = 0; 
+                        if(typeof this.gameBoard[j + 1][i - 1] != "string" && j + 1 < 10 && i -1 > -1) this.gameBoard[j + 1][i - 1] = 0; 
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j - 1][i + 1] != "string") this.gameBoard[j - 1][i + 1] = 0;
+                        if(typeof this.gameBoard[j - 1][i + 1] != "string" && j - 1 > -1 && i + 1 < 10) this.gameBoard[j - 1][i + 1] = 0;
                     }catch{
                     }
                     try{
-                        if(typeof this.gameBoard[j - 1][i - 1] != "string" ) this.gameBoard[j - 1][i - 1] = 0;
+                        if(typeof this.gameBoard[j - 1][i - 1] != "string" && j - 1 > -1 && i - 1 > -1) this.gameBoard[j - 1][i - 1] = 0;
                     }catch{
                     }
                 }
@@ -106,6 +106,19 @@ class GameBoard{
             }
         }
         return true; //can place ship
+    }
+
+    randomPlace(ship){
+        let position = ["vertical", "horizontal"];
+        let x;
+        let y;
+        do{
+            x = Math.round(Math.random()*9); //select randomly between 0 to 9
+            y = Math.round(Math.random()*9); //select randomly between 0 to 9
+            ship.position = position[Math.round(Math.random())]; //select randomly vertical or horizontal
+        }while(this.canPlaceShip(x, y, ship) != true)
+        
+        this.placeShip(x, y, ship);
     }
 }
 
