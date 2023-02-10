@@ -1,9 +1,15 @@
-import DOM from "./DOM.js"
+import DOM from "./DOM.js";
 import GameBoard from "./GameBoard.js";
-import Ship from "./Ship.js";
+import Ship from "./Ship.js"
 
-//DOM.generateField();
 
+const dom = new DOM();
+
+
+dom.generateField();
+
+
+/*
 const board = new GameBoard();
 
 const carrier = new Ship(5, "carrier", "horizontal");
@@ -16,3 +22,4 @@ const ships = [carrier, battleship, cruiser, submarine, destroyer];
 ships.forEach(el => board.randomPlace(el));
 
 console.table(board.gameBoard)
+*/
