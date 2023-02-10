@@ -76,7 +76,7 @@ class DOM{
     placeShip(x, y){
         if(playerBoard.canPlaceShip(x , y, this.nextShip)) {
             playerBoard.placeShip(x, y, this.nextShip);
-
+            const changeName = () => document.getElementById("boat-name").innerHTML = this.nextShip.name;
             for(let i = 0; i < this.nextShip.length; i ++){
                 let el;
                 this.nextShip.position == "horizontal" ? el = document.getElementById(`${x + i}${y}`) : el = document.getElementById(`${x}${y + i}`);
@@ -85,19 +85,23 @@ class DOM{
 
             if(this.nextShip.name == "carrier") {
                 this.nextShip = Object.assign({}, this.battleship);
+                changeName();
                 return;
             }
             if(this.nextShip.name == "battleship"){
                 this.nextShip = Object.assign({}, this.cruiser);
+                changeName();
                 return;
             }
              
             if(this.nextShip.name == "cruiser"){
                 this.nextShip = Object.assign({}, this.submarine);
+                changeName();
                 return;
             }
             if(this.nextShip.name == "submarine"){
                 this.nextShip = Object.assign({}, this.destroyer);
+                changeName();
                 return;
             }
             if(this.nextShip.name == "destroyer") alert("Start game");
